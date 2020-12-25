@@ -18,9 +18,10 @@ func main() {
 	var motd string
 	var interval time.Duration
 	var addr string
-	cmd := cobra.Command{Run: func(cmd *cobra.Command, args []string) {
-		run(motd, port, interval, addr)
-	}}
+	cmd := cobra.Command{
+		Run: func(cmd *cobra.Command, args []string) { run(motd, port, interval, addr) },
+		Use: "lanBroadcast [--port] [--motd] [--interval] [--address]",
+	}
 	flags := cmd.Flags()
 	flags.IntVar(&port, "port", 25565, "The port of the server")
 	flags.StringVar(&motd, "motd", "", "The MOTD to display")
@@ -47,6 +48,7 @@ func run(motd string, port int, interval time.Duration, addr string) {
 	done := make(chan bool)
 
 	go func() {
+		fmt.Println("Started broadcasting to LAN")
 		l.Broadcast()
 		close(done)
 	}()
