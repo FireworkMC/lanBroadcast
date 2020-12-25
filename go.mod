@@ -1,4 +1,4 @@
-module github.com/FireworkMC/lanBroadcast
+module github.com/FireworkMC/lanbroadcast
 
 go 1.15
 
