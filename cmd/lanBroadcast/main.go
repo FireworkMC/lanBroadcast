@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"time"
 
-	lanbroadcast "github.com/FireworkMC/lanBroadcast"
+	lanbroadcast "github.com/FireworkMC/lanbroadcast"
 	"github.com/spf13/cobra"
 )
 
