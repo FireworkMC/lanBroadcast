@@ -163,6 +163,8 @@ github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5/go.mod h1
 github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2/go.mod h1:UETIi67q53MR2AWcXfiuqkDkRtnGDLqkBTpCHuJHxtU=
 github.com/yehan2002/errors v1.0.0 h1:GKbl36LY92UJ68Uz/gxMV/5VaSGMHMHMPedXdrApE+k=
 github.com/yehan2002/errors v1.0.0/go.mod h1:vd/cZvWo6tzv1v1UdN1akENX8CeaZd4nkqzKHt8LwEo=
+github.com/yehan2002/errors v1.1.1 h1:BRNCHHhFvva+1lQNFWr+BdBaJ2PzvucJsz3eZnXtiKQ=
+github.com/yehan2002/errors v1.1.1/go.mod h1:vd/cZvWo6tzv1v1UdN1akENX8CeaZd4nkqzKHt8LwEo=
 go.etcd.io/bbolt v1.3.2/go.mod h1:IbVyRI1SCnLcuJnV2u8VeU0CEYM7e686BmAb1XKL+uU=
 go.opencensus.io v0.21.0/go.mod h1:mSImk1erAIZhrmZN+AvHh14ztQfjbGwt4TtuofqLduU=
 go.opencensus.io v0.22.0/go.mod h1:+kGneAE2xo2IficOXnaByMWTGM9T73dGwxeWcUqIpI8=
