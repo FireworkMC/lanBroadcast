@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
 	"net"
@@ -9,8 +10,7 @@ import (
 	"os/signal"
 	"time"
 
-	lanbroadcast "github.com/FireworkMC/lanbroadcast"
-	"github.com/spf13/cobra"
+	lan "github.com/FireworkMC/lanbroadcast"
 )
 
 func main() {
@@ -18,21 +18,13 @@ func main() {
 	var motd string
 	var interval time.Duration
 	var addr string
-	cmd := cobra.Command{
-		Run: func(cmd *cobra.Command, args []string) { run(motd, port, interval, addr) },
-		Use: "lanBroadcast [--port] [--motd] [--interval] [--address]",
-	}
-	flags := cmd.Flags()
-	flags.IntVar(&port, "port", 25565, "The port of the server")
-	flags.StringVar(&motd, "motd", "", "The MOTD to display")
-	flags.DurationVar(&interval, "interval", time.Second*5, "The interval between broadcasts")
-	flags.StringVar(&addr, "address", "", "The address of the host network. This is automatically detected")
-	if err := cmd.Execute(); err != nil {
-		log.Fatal(err)
-	}
 
-}
-func run(motd string, port int, interval time.Duration, addr string) {
+	flag.IntVar(&port, "port", 25565, "The port of the server")
+	flag.StringVar(&motd, "motd", "", "The MOTD to display")
+	flag.DurationVar(&interval, "interval", time.Second*5, "The interval between broadcasts")
+	flag.StringVar(&addr, "address", "", "The address of the host network. This is automatically detected")
+	flag.Parse()
+
 	var ip net.IP
 	if addr != "" {
 		ip = net.ParseIP(addr)
@@ -40,7 +32,7 @@ func run(motd string, port int, interval time.Duration, addr string) {
 			log.Fatal("The provided IP is not valid.")
 		}
 	}
-	l, err := lanbroadcast.NewLANBroadcast(context.TODO(), ip, port, motd)
+	l, err := lan.New(ip, port, motd)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -49,14 +41,14 @@ func run(motd string, port int, interval time.Duration, addr string) {
 
 	go func() {
 		fmt.Println("Started broadcasting to LAN")
-		l.Broadcast()
+		l.Broadcast(context.Background())
 		close(done)
 	}()
 
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, os.Interrupt)
 	<-sig
-	fmt.Println("Received Ctrl+C exiting")
+	fmt.Println("\rReceived Ctrl+C exiting")
 	l.Close()
 	<-done
 }
