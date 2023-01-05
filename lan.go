@@ -111,7 +111,7 @@ func New(ip net.IP, port int, motd string) (l *LANBroadcast, err error) {
 	}
 
 	if ip == nil || ip.IsUnspecified() || ip.IsLoopback() {
-		if ip, err = GetHostAddr(""); err != nil {
+		if ip, err = getHostAddr(""); err != nil {
 			return
 		}
 	}
